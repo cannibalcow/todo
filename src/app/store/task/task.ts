@@ -3,4 +3,5 @@ export class Task {
     title: string;
     description: string;
     estimate: number;
+    started: boolean;
 }

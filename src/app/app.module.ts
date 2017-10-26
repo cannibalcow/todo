@@ -12,7 +12,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { reducers } from './store/reducers';
 import { TaskService } from './provider/task.service';
-
+import { MatButtonModule, MatCardModule, MatIcon, MatIconModule } from '@angular/material';
 @NgModule({
   declarations: [
     AppComponent
@@ -20,6 +20,9 @@ import { TaskService } from './provider/task.service';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule,
     RouterModule.forRoot(routes, { useHash: true }),
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot([

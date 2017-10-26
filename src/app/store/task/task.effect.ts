@@ -27,8 +27,8 @@ export class TaskEffect {
         .switchMap(task => {
             console.log('add task');
             // return Observable.of({ type: taskaction.ADD_TASK_SUCCESS });
-            this.taskService.addTask(task);
-            return Observable.of(new taskaction.AddTaskSuccess(this.taskService.tasks));
+            // this.taskService.addTask(task);
+            return Observable.of(new taskaction.AddTaskSuccess([]));
         });
 
     @Effect()

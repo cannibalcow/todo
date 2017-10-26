@@ -1,11 +1,22 @@
-<pre>{{tasks|async}}</pre>
+<button mat-fab color="primary" (click)="addBook() ">
+  <mat-icon aria-label="Example icon-button with a heart icon">add to queue</mat-icon>
+</button>
 
-
-<ul>
-  <li *ngFor="let task of tasks| async">
-    <pre>
-      {{task|json}}
-    </pre>
-  </li>
-</ul>
-<button (click)="addBook()">add book</button>
+<div *ngFor="let task of tasks">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>#{{task.id}} - {{task.title}}</mat-card-title>
+      <mat-card-subtitle>{{task.estimate}} hours</mat-card-subtitle>
+    </mat-card-header>
+    <!-- <img mat-card-image src="http://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+    <mat-card-content>
+      <p>
+        {{task.description}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button (click)=delete(task.id) mat-button>Cancel</button>
+      <button (click)=begin(task.id) mat-button>Begin</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

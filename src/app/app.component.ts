@@ -4,7 +4,7 @@ import { reducer } from './store/reducers/index';
 import { Component, OnInit } from '@angular/core';
 import * as reducers from './store/reducers';
 import * as fromTask from './store/task/task.reducer';
-import { AddTask } from './store/task/task.action';
+import { AddTask, DeleteTask, BeginTask } from './store/task/task.action';
 import { Task } from './store/task/task';
 
 @Component({
@@ -14,17 +14,25 @@ import { Task } from './store/task/task';
 })
 export class AppComponent implements OnInit {
   title = 'app';
-  tasks = null;
+  tasks;
   num = 0;
 
   constructor(private store: Store<reducers.State>) {
   }
 
   public ngOnInit(): void {
-    this.store.select(state => this.tasks = state.task.tasks);
+    this.store.subscribe(state => {
+      this.tasks = state.task.tasks;
+    });
   }
 
+  delete(id: number) {
+    this.store.dispatch(new DeleteTask(id));
+  }
 
+  begin(id: number) {
+    this.store.dispatch(new BeginTask(id));
+  }
 
   addBook() {
     const task = new Task();
@@ -34,7 +42,6 @@ export class AppComponent implements OnInit {
     task.description = 'Clean out the garage';
     this.store.dispatch(new AddTask(task));
   }
-
 
   nextNumber(): number {
     this.num++;

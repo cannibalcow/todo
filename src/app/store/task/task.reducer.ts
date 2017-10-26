@@ -1,7 +1,7 @@
 import { createSelector } from '@ngrx/store';
 import { State } from './task.reducer';
 import { Task } from './task';
-import { ADD_TASK, DELETE_TASK, TaskActions, ADD_TASK_SUCCESS } from './task.action';
+import { ADD_TASK, DELETE_TASK, TaskActions, ADD_TASK_SUCCESS, BEGIN_TASK } from './task.action';
 
 export interface State {
     tasks: Task[];
@@ -18,19 +18,31 @@ export function reducer(state = initialState, action: TaskActions): State {
         case ADD_TASK: {
             console.log('Reducer', 'ADD_TASK');
             return {
-                ...state
+                ...state,
+                tasks: state.tasks.concat(action.payload),
+                loading: true
             };
         }
         case ADD_TASK_SUCCESS: {
             console.log('reducer', ADD_TASK_SUCCESS);
             return {
                 ...state,
-                tasks: action.payload
+                loading: false,
             };
         }
         case DELETE_TASK: {
             console.log('Reducer', 'DELETE_TASK');
-            return state;
+            return {
+                ...state,
+                tasks: state.tasks.filter(t => t.id !== action.payload)
+            };
+        }
+        case BEGIN_TASK: {
+            const index = state.tasks.findIndex(f => f.id === action.payload);
+            state.tasks[index].started = true;
+            return {
+                ...state,
+            };
         }
         default: {
             return state;

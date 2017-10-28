@@ -16,17 +16,15 @@ const initialState: State = {
 export function reducer(state = initialState, action: TaskActions): State {
     switch (action.type) {
         case ADD_TASK: {
-            console.log('Reducer', 'ADD_TASK');
             return {
                 ...state,
-                tasks: state.tasks.concat(action.payload),
                 loading: true
             };
         }
         case ADD_TASK_SUCCESS: {
-            console.log('reducer', ADD_TASK_SUCCESS);
             return {
                 ...state,
+                tasks: action.payload,
                 loading: false,
             };
         }

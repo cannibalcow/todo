@@ -1,3 +1,5 @@
+import { schema } from './db';
+import { DBModule } from '@ngrx/db';
 import { metaReducers } from './store/reducers/index';
 import { TaskEffect } from './store/task/task.effect';
 import { EffectsModule } from '@ngrx/effects';
@@ -27,7 +29,8 @@ import { MatButtonModule, MatCardModule, MatIcon, MatIconModule } from '@angular
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot([
       TaskEffect
-    ])
+    ]),
+    DBModule.provideDB(schema)
   ],
   providers: [TaskService],
   bootstrap: [AppComponent]

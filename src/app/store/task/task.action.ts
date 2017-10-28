@@ -4,6 +4,7 @@ import { Task } from './task';
 export const ADD_TASK = '[Task] Add';
 export const DELETE_TASK = '[Task] Delete';
 export const ADD_TASK_SUCCESS = '[Task] Success';
+export const LOAD_TASKS = '[Task] Load Tasks';
 export const BEGIN_TASK = '[Task] Begin';
 
 export class AddTask implements Action {
@@ -13,6 +14,11 @@ export class AddTask implements Action {
 
 export class AddTaskSuccess implements Action {
     readonly type = ADD_TASK_SUCCESS;
+    constructor(public payload: Task) { }
+}
+
+export class LoadTasks implements Action {
+    readonly type = LOAD_TASKS;
     constructor(public payload: Task[]) { }
 }
 

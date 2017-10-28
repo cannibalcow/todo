@@ -1,3 +1,5 @@
+import { Task } from './task';
+import { Database } from '@ngrx/db';
 import { TaskService } from './../../provider/task.service';
 
 import { empty } from 'rxjs/observable/empty';
@@ -12,12 +14,14 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/empty';
+import 'rxjs/add/operator/toArray';
 
 @Injectable()
 export class TaskEffect {
 
 
-    constructor(private actions: Actions, private taskService: TaskService) {
+
+    constructor(private actions: Actions, private db: Database) {
     }
 
     @Effect()
@@ -25,18 +29,10 @@ export class TaskEffect {
         .ofType(taskaction.ADD_TASK)
         .map((action: taskaction.AddTask) => action.payload)
         .switchMap(task => {
-            console.log('add task');
-            // return Observable.of({ type: taskaction.ADD_TASK_SUCCESS });
-            // this.taskService.addTask(task);
-            return Observable.of(new taskaction.AddTaskSuccess([]));
+            this.db.insert('todos', [task]);
+            return this.db.query('todos')
+                .toArray()
+                .map((tasks: Task[]) => new taskaction.AddTaskSuccess(tasks));
         });
 
-    @Effect()
-    addTaskSuccess: Observable<Action> = this.actions
-        .ofType(taskaction.ADD_TASK_SUCCESS)
-        .map(toPayload)
-        .switchMap(p => {
-            console.log('sucess', p);
-            return Observable.empty();
-        });
 }

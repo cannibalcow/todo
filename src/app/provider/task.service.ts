@@ -4,15 +4,14 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class TaskService {
 
-  tasks: Array<Task>;
-
-  constructor() {
-    this.tasks = new Array<Task>();
-  }
+  tasks: Task[] = [];
 
   addTask(task: Task) {
-    console.log(task);
     this.tasks.push(task);
+  }
+
+  getTask(): Task[] {
+    return this.tasks;
   }
 
   deleteTask(id: number) {

@@ -1,16 +1,19 @@
+import { toPayload } from '@ngrx/effects';
 import { createSelector } from '@ngrx/store';
 import { State } from './task.reducer';
 import { Task } from './task';
-import { ADD_TASK, DELETE_TASK, TaskActions, ADD_TASK_SUCCESS, BEGIN_TASK } from './task.action';
+import { ADD_TASK, DELETE_TASK, TaskActions, ADD_TASK_SUCCESS, BEGIN_TASK, LOAD_TASKS, LOAD_SUCCESS } from './task.action';
 
 export interface State {
     tasks: Task[];
     loading: boolean;
+    adding: boolean;
 }
 
 const initialState: State = {
     tasks: [],
     loading: false,
+    adding: false
 };
 
 export function reducer(state = initialState, action: TaskActions): State {
@@ -18,16 +21,22 @@ export function reducer(state = initialState, action: TaskActions): State {
         case ADD_TASK: {
             return {
                 ...state,
-                loading: true
+                adding: true
             };
         }
         case ADD_TASK_SUCCESS: {
             return {
                 ...state,
-                tasks: action.payload,
-                loading: false,
+                adding: false,
             };
         }
+        case LOAD_SUCCESS: {
+            return {
+                ...state,
+                tasks: action.payload
+            };
+        }
+
         case DELETE_TASK: {
             console.log('Reducer', 'DELETE_TASK');
             return {

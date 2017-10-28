@@ -30,9 +30,16 @@ export class TaskEffect {
         .map((action: taskaction.AddTask) => action.payload)
         .switchMap(task => {
             this.db.insert('todos', [task]);
-            return this.db.query('todos')
-                .toArray()
-                .map((tasks: Task[]) => new taskaction.AddTaskSuccess(tasks));
+            return Observable.of(new taskaction.AddTaskSuccess(task));
         });
 
+    @Effect()
+    load: Observable<Action> = this.actions
+        .ofType(taskaction.LOAD_TASKS)
+        .map((action: taskaction.LoadTasks) => action.payload)
+        .switchMap(() =>
+            this.db.query('todos')
+                .toArray()
+                .map((tasks: Task[]) => new taskaction.LoadTasksSuccess(tasks))
+        );
 }

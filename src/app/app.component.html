@@ -1,35 +1,37 @@
-<div class="row">
-  <div class="col-md-3">
-    <div class="panel panel-success">
-      <div class="panel-heading">Manager</div>
-      <div class="panel-body">
-        <button type="button" class="btn btn-default" (click)="addTask()">
-          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Task
-        </button>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="panel panel-success">
+        <div class="panel-heading">Manager</div>
+        <div class="panel-body">
+          <button type="button" class="btn btn-default" (click)="addTask()">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Task
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col-md-3">
-    <div class="panel panel-primary">
-      <div class="panel-heading">Backlog</div>
-      <div class="panel-body" *ngFor="let task of backlog">
-        <app-card [task]="task"></app-card>
+    <div class="col-md-3">
+      <div class="panel panel-primary">
+        <div class="panel-heading">Backlog</div>
+        <div class="panel-body" *ngFor="let task of backlog">
+          <app-card [task]="task"></app-card>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col-md-3">
-    <div class="panel panel-primary">
-      <div class="panel-heading">Backlog</div>
-      <div class="panel-body" *ngFor="let task of inprogress">
-        <app-card [task]="task"></app-card>
+    <div class="col-md-3">
+      <div class="panel panel-primary">
+        <div class="panel-heading">Backlog</div>
+        <div class="panel-body" *ngFor="let task of inprogress">
+          <app-card [task]="task"></app-card>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col-md-3">
-    <div class="panel panel-primary">
-      <div class="panel-heading">Backlog</div>
-      <div class="panel-body" *ngFor="let task of done">
-        <app-card [task]="task"></app-card>
+    <div class="col-md-3">
+      <div class="panel panel-primary">
+        <div class="panel-heading">Backlog</div>
+        <div class="panel-body" *ngFor="let task of done">
+          <app-card [task]="task"></app-card>
+        </div>
       </div>
     </div>
   </div>

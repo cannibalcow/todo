@@ -49,10 +49,11 @@ export class TaskEffect {
                 .map((tasks: Task[]) => new taskaction.LoadTasksSuccess(tasks));
         });
 
-    // @Effect()
-    // taskSuccess: Observable<Action> = this.actions
-    //     .ofType(taskaction.ADD_TASK_SUCCESS)
-    //     .switchMap(() => {
-    //         return Observable.of(new taskaction.LoadTasks(null));
-    //     });
+    @Effect()
+    begintask: Observable<Action> = this.actions
+        .ofType(taskaction.BEGIN_TASK)
+        .map((action: taskaction.BeginTask) => action.payload)
+        .switchMap(task => {
+            return Observable.empty();
+        });
 }

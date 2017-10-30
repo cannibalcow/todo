@@ -1,22 +1,36 @@
-<button mat-fab color="primary" (click)="addBook() ">
-  <mat-icon aria-label="Example icon-button with a heart icon">add to queue</mat-icon>
-</button>
-
-<div *ngFor="let task of tasks">
-  <mat-card class="example-card">
-    <mat-card-header>
-      <mat-card-title>#{{task.id}} - {{task.title}}</mat-card-title>
-      <mat-card-subtitle>{{task.estimate}} hours</mat-card-subtitle>
-    </mat-card-header>
-    <!-- <img mat-card-image src="http://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
-    <mat-card-content>
-      <p>
-        {{task.description}}
-      </p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button (click)=delete(task.id) mat-button>Cancel</button>
-      <button (click)=begin(task.id) mat-button>Begin</button>
-    </mat-card-actions>
-  </mat-card>
+<div class="row">
+  <div class="col-md-3">
+    <div class="panel panel-success">
+      <div class="panel-heading">Manager</div>
+      <div class="panel-body">
+        <button type="button" class="btn btn-default" (click)="addTask()">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Task
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Backlog</div>
+      <div class="panel-body" *ngFor="let task of backlog">
+        <app-card [task]="task"></app-card>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Backlog</div>
+      <div class="panel-body" *ngFor="let task of inprogress">
+        <app-card [task]="task"></app-card>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Backlog</div>
+      <div class="panel-body" *ngFor="let task of done">
+        <app-card [task]="task"></app-card>
+      </div>
+    </div>
+  </div>
 </div>

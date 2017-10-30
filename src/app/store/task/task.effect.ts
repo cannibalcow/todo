@@ -1,3 +1,4 @@
+import { reduce } from 'rxjs/operators/reduce';
 import { Task } from './task';
 import { Database } from '@ngrx/db';
 import { TaskService } from './../../provider/task.service';
@@ -15,14 +16,18 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/empty';
 import 'rxjs/add/operator/toArray';
+import { defer } from 'rxjs/observable/defer';
 
 @Injectable()
 export class TaskEffect {
 
-
-
     constructor(private actions: Actions, private db: Database) {
     }
+
+    @Effect({ dispatch: false })
+    openDB$: Observable<any> = defer(() => {
+        return this.db.open('todos');
+    });
 
     @Effect()
     addTask: Observable<Action> = this.actions
@@ -37,9 +42,17 @@ export class TaskEffect {
     load: Observable<Action> = this.actions
         .ofType(taskaction.LOAD_TASKS)
         .map((action: taskaction.LoadTasks) => action.payload)
-        .switchMap(() =>
-            this.db.query('todos')
+        .switchMap(() => {
+            console.log('laod tasks');
+            return this.db.query('todos')
                 .toArray()
-                .map((tasks: Task[]) => new taskaction.LoadTasksSuccess(tasks))
-        );
+                .map((tasks: Task[]) => new taskaction.LoadTasksSuccess(tasks));
+        });
+
+    // @Effect()
+    // taskSuccess: Observable<Action> = this.actions
+    //     .ofType(taskaction.ADD_TASK_SUCCESS)
+    //     .switchMap(() => {
+    //         return Observable.of(new taskaction.LoadTasks(null));
+    //     });
 }

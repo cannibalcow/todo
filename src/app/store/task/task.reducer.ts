@@ -1,8 +1,17 @@
 import { toPayload } from '@ngrx/effects';
 import { createSelector } from '@ngrx/store';
 import { State } from './task.reducer';
-import { Task } from './task';
-import { ADD_TASK, DELETE_TASK, TaskActions, ADD_TASK_SUCCESS, BEGIN_TASK, LOAD_TASKS, LOAD_SUCCESS } from './task.action';
+import { Task, Column } from './task';
+import {
+    ADD_TASK,
+    ADD_TASK_SUCCESS,
+    BEGIN_TASK,
+    DELETE_TASK,
+    LOAD_SUCCESS,
+    LOAD_TASKS,
+    LoadTasks,
+    TaskActions,
+} from './task.action';
 
 export interface State {
     tasks: Task[];
@@ -25,20 +34,28 @@ export function reducer(state = initialState, action: TaskActions): State {
             };
         }
         case ADD_TASK_SUCCESS: {
+            const tasks = state.tasks;
+
             return {
                 ...state,
-                adding: false,
+                tasks: tasks.concat(action.payload),
+                adding: false
+            };
+        }
+        case LOAD_TASKS: {
+            return {
+                ...state,
+                loading: true
             };
         }
         case LOAD_SUCCESS: {
             return {
                 ...state,
-                tasks: action.payload
-            };
+                tasks: action.payload,
+                loading: false
+            }
         }
-
         case DELETE_TASK: {
-            console.log('Reducer', 'DELETE_TASK');
             return {
                 ...state,
                 tasks: state.tasks.filter(t => t.id !== action.payload)
@@ -46,9 +63,11 @@ export function reducer(state = initialState, action: TaskActions): State {
         }
         case BEGIN_TASK: {
             const index = state.tasks.findIndex(f => f.id === action.payload);
-            state.tasks[index].started = true;
+            const tasks = state.tasks;
+            tasks[index].column = Column.IN_PROGRESS;
             return {
                 ...state,
+                tasks: tasks
             };
         }
         default: {

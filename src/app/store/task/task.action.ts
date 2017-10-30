@@ -21,7 +21,7 @@ export class AddTaskSuccess implements Action {
 
 export class LoadTasks implements Action {
     readonly type = LOAD_TASKS;
-    constructor(public payload: Task) { }
+    constructor(public payload: Task[]) { }
 }
 
 export class LoadTasksSuccess implements Action {

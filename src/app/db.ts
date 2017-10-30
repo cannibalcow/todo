@@ -2,9 +2,9 @@ import { DBSchema } from '@ngrx/db';
 
 export const schema: DBSchema = {
     version: 1,
-    name: 'todo',
+    name: 'todos',
     stores: {
-        toods: {
+        todos: {
             autoIncrement: true,
             primaryKey: 'id'
         }

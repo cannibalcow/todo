@@ -1,0 +1,18 @@
+<div class="list-group" *ngIf="task">
+  <div class="list-group-item active">
+    <span>#{{task.id}} - {{task.title}}</span>
+    <button type="button" class="btn btn-default pull-right btn-xs" aria-label="Left Align" (click)="delete(task.id)">
+      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+    </button>
+  </div>
+  <div class="list-group-item">
+    <p>{{task.description}}</p>
+    <p class="text-left">
+      <strong>Estimate: </strong>{{task.estimate}} hours</p>
+    <span class="text-right">
+      <button type="button" class="btn btn-default btn-xs" (click)="begin(task.id)">
+        <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+      </button>
+    </span>
+  </div>
+</div>

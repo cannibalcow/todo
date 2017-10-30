@@ -1,4 +1,18 @@
-.example-card {
-    width: 400px;
-  }
-  
+#backlog {
+    background: #909bc0;
+}
+
+#done {
+    background: #1c6e61;
+}
+#done h1 {
+    color: white;
+}
+
+#progress {
+    background: #bada7f;
+}
+
+#progress h1 {
+    color: white;
+}

@@ -15,10 +15,14 @@ import { AppComponent } from './app.component';
 import { reducers } from './store/reducers';
 import { TaskService } from './provider/task.service';
 import { CardComponent } from './components/card/card.component';
+import { SummaryComponent } from './components/summary/summary.component';
+import { KanbanComponent } from './components/kanban/kanban.component';
 @NgModule({
   declarations: [
     AppComponent,
-    CardComponent
+    CardComponent,
+    SummaryComponent,
+    KanbanComponent
   ],
   imports: [
     BrowserModule,

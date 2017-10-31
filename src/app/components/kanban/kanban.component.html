@@ -1,0 +1,41 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="panel panel-success">
+        <div class="panel-heading">Manager</div>
+        <div class="panel-body">
+          <a routerLink="/summary" class="btn btn-default">
+            <span class="glyphicon glyphicon-signal"></span> Summary
+          </a>
+          <button type="button" class="btn btn-default" (click)="addTask()">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Task
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="panel panel-warning">
+        <div class="panel-heading">Backlog</div>
+        <div class="panel-body" *ngFor="let task of backlog">
+          <app-card [task]="task"></app-card>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="panel panel-info">
+        <div class="panel-heading">In progress</div>
+        <div class="panel-body" *ngFor="let task of inprogress">
+          <app-card [task]="task"></app-card>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="panel panel-success">
+        <div class="panel-heading">Done</div>
+        <div class="panel-body" *ngFor="let task of done">
+          <app-card [task]="task"></app-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

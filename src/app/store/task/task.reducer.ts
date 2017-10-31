@@ -63,11 +63,15 @@ export function reducer(state = initialState, action: TaskActions): State {
         }
         case BEGIN_TASK: {
             const index = state.tasks.findIndex(f => f.id === action.payload);
-            const tasks = state.tasks;
-            tasks[index].column = Column.IN_PROGRESS;
+            const updatedTask = {
+                ...state.tasks[index],
+                column:  Column.IN_PROGRESS
+            };
+            const newTasks = [...state.tasks];
+            newTasks[index] = updatedTask;
             return {
                 ...state,
-                tasks: tasks
+                tasks: newTasks
             };
         }
         default: {

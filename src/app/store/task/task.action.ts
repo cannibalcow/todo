@@ -8,6 +8,7 @@ export const ADD_TASK_SUCCESS = '[Task] Success';
 export const LOAD_TASKS = '[Task] Load Tasks';
 export const LOAD_SUCCESS = '[Task] Load success';
 export const BEGIN_TASK = '[Task] Begin';
+export const DONE_TASK = '[Task] Done';
 
 export class AddTask implements Action {
     readonly type = ADD_TASK;
@@ -37,8 +38,13 @@ export class DeleteTask implements Action {
 export class BeginTask implements Action {
     readonly type = BEGIN_TASK;
     constructor(public payload: number) {
-
     }
 }
 
-export type TaskActions = AddTask | AddTaskSuccess | DeleteTask | BeginTask | LoadTasks | LoadTasksSuccess;
+export class DoneTask implements Action {
+    readonly type = DONE_TASK;
+    constructor(public taskId: number) {
+    }
+}
+
+export type TaskActions = AddTask | AddTaskSuccess | DeleteTask | BeginTask | LoadTasks | LoadTasksSuccess | DoneTask;

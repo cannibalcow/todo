@@ -15,7 +15,9 @@
     </div>
     <div class="col-md-3">
       <div class="panel panel-warning">
-        <div class="panel-heading">Backlog</div>
+        <div class="panel-heading">Backlog
+          <span class="pull-right">{{backlog.length}} tasks - {{backlogHours}} hours</span>
+        </div>
         <div class="panel-body" *ngFor="let task of backlog">
           <app-card [task]="task"></app-card>
         </div>
@@ -23,7 +25,9 @@
     </div>
     <div class="col-md-3">
       <div class="panel panel-info">
-        <div class="panel-heading">In progress</div>
+        <div class="panel-heading">In progress
+          <span class="pull-right">{{inprogress.length}} tasks - {{inprogressHours}} hours</span>
+        </div>
         <div class="panel-body" *ngFor="let task of inprogress">
           <app-card [task]="task"></app-card>
         </div>
@@ -31,7 +35,9 @@
     </div>
     <div class="col-md-3">
       <div class="panel panel-success">
-        <div class="panel-heading">Done</div>
+        <div class="panel-heading">Done
+          <span class="pull-right">{{done.length}} tasks - {{doneHours}} hours</span>
+        </div>
         <div class="panel-body" *ngFor="let task of done">
           <app-card [task]="task"></app-card>
         </div>

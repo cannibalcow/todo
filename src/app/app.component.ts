@@ -12,6 +12,20 @@ import { Column, Task } from './store/task/task';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
+  animations: [
+    trigger('adding', [
+      state('inactive', style({
+        backgroundColor: '#eee',
+        transform: 'scale(1)'
+      })),
+      state('active', style({
+        backgroundColor: '#cfd8dc',
+        transform: 'scale(1.1)'
+      })),
+      transition('inactive => active', animate('2500ms ease-in')),
+      transition('active => inactive', animate('2500ms ease-out'))
+    ])
+  ]
 })
 export class AppComponent implements OnInit {
   public ngOnInit(): void {

@@ -11,6 +11,7 @@ import {
     LOAD_TASKS,
     LoadTasks,
     TaskActions,
+    DONE_TASK,
 } from './task.action';
 
 export interface State {
@@ -53,7 +54,7 @@ export function reducer(state = initialState, action: TaskActions): State {
                 ...state,
                 tasks: action.payload,
                 loading: false
-            }
+            };
         }
         case DELETE_TASK: {
             return {
@@ -65,10 +66,23 @@ export function reducer(state = initialState, action: TaskActions): State {
             const index = state.tasks.findIndex(f => f.id === action.payload);
             const updatedTask = {
                 ...state.tasks[index],
-                column:  Column.IN_PROGRESS
+                column: Column.IN_PROGRESS
             };
             const newTasks = [...state.tasks];
             newTasks[index] = updatedTask;
+            return {
+                ...state,
+                tasks: newTasks
+            };
+        }
+        case DONE_TASK: {
+            const index = state.tasks.findIndex(f => f.id === action.taskId);
+            const doneTask = {
+                ...state.tasks[index],
+                column: Column.DONE
+            };
+            const newTasks = [...state.tasks];
+            newTasks[index] = doneTask;
             return {
                 ...state,
                 tasks: newTasks

@@ -1,3 +1,4 @@
+import { DoneTask } from './../../store/task/task.action';
 import { Store } from '@ngrx/store';
 import { Component, Input, OnInit } from '@angular/core';
 import * as reducers from '../../store/reducers';
@@ -25,5 +26,21 @@ export class CardComponent implements OnInit {
 
   begin(id: number) {
     this.store.dispatch(new BeginTask(id));
+  }
+
+  done(id: number) {
+    this.store.dispatch(new DoneTask(id));
+  }
+
+  isStoppable() {
+    return this.task.column === Column.IN_PROGRESS;
+  }
+
+  isStartable() {
+    return this.task.column === Column.BACKLOG;
+  }
+
+  isDone() {
+    return this.task.column === Column.DONE;
   }
 }

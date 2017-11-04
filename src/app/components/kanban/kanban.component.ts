@@ -1,3 +1,4 @@
+import { ColumnAware } from '../../decorators/column-aware';
 import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 import * as reducers from '../../store/reducers';
@@ -11,12 +12,16 @@ import { Column, Task } from '../../store/task/task';
   templateUrl: './kanban.component.html',
   styleUrls: ['./kanban.component.css']
 })
+@ColumnAware
 export class KanbanComponent implements OnInit {
 
   title = 'app';
   backlog = [];
+  backlogHours = 0;
   inprogress = [];
+  inprogressHours = 0;
   done = [];
+  doneHours = 0;
 
   num = 0;
   adding = false;
@@ -28,13 +33,16 @@ export class KanbanComponent implements OnInit {
   public ngOnInit(): void {
     this.store.subscribe(state => {
       this.backlog = state.task.tasks.filter(task => {
-        console.log(task.column, "===", Column.BACKLOG);
         return task.column === Column.BACKLOG;
       });
       this.inprogress = state.task.tasks.filter(task => task.column === Column.IN_PROGRESS);
       this.done = state.task.tasks.filter(task => task.column === Column.DONE);
       this.adding = state.task.adding;
       this.loading = state.task.loading;
+
+      this.doneHours = this.sumHours(this.done);
+      this.inprogressHours = this.sumHours(this.inprogress);
+      this.backlogHours = this.sumHours(this.backlog);
     });
   }
 
@@ -65,4 +73,11 @@ export class KanbanComponent implements OnInit {
     return this.num;
   }
 
+  sumHours(tasks: Task[]) {
+    if (tasks && tasks.length > 0) {
+      return tasks.map((t: Task) => t.estimate).reduce((sum, current) => sum + current);
+    } else {
+      return 0;
+    }
+  }
 }

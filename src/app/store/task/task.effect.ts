@@ -1,7 +1,6 @@
 import { reduce } from 'rxjs/operators/reduce';
 import { Task } from './task';
 import { Database } from '@ngrx/db';
-import { TaskService } from './../../provider/task.service';
 
 import { empty } from 'rxjs/observable/empty';
 import { of } from 'rxjs/observable/of';

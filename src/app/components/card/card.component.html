@@ -10,7 +10,10 @@
     <p class="text-left">
       <strong>Estimate: </strong>{{task.estimate}} hours</p>
     <span class="text-right">
-      <button type="button" class="btn btn-default btn-xs" (click)="begin(task.id)">
+      <button *ngIf="isStoppable()" type="button" class="btn btn-default btn-xs" (click)="done(task.id)">
+        <span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
+      </button>
+      <button *ngIf="isStartable()" type="button" class="btn btn-default btn-xs" (click)="begin(task.id)">
         <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
       </button>
     </span>

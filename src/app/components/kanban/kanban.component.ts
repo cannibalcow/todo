@@ -23,7 +23,6 @@ export class KanbanComponent implements OnInit {
   done = [];
   doneHours = 0;
 
-  num = 0;
   adding = false;
   loading = false;
 
@@ -56,21 +55,6 @@ export class KanbanComponent implements OnInit {
 
   load() {
     this.store.dispatch(new LoadTasks(null));
-  }
-
-  addTask() {
-    const task = new Task();
-    task.id = this.nextNumber();
-    task.title = 'Garage clening';
-    task.estimate = 8;
-    task.description = 'Clean out the garage';
-    task.column = Column.BACKLOG;
-    this.store.dispatch(new AddTask(task));
-  }
-
-  nextNumber(): number {
-    this.num++;
-    return this.num;
   }
 
   sumHours(tasks: Task[]) {

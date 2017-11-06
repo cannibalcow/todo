@@ -33,7 +33,6 @@ export class TaskEffect {
         .ofType(taskaction.ADD_TASK)
         .map((action: taskaction.AddTask) => action.payload)
         .switchMap(task => {
-            this.db.insert('todos', [task]);
             return Observable.of(new taskaction.AddTaskSuccess(task));
         });
 

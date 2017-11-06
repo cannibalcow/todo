@@ -1,4 +1,4 @@
-<form class="form" novalidate [formGroup]="createCardForm">
+<form class="form" [formGroup]="createCardForm">
   <div class="form-group">
     <label for="titleInput">Title</label>
     <input id="titleInput" class="form-control" type="Text" formControlName="title" />
@@ -11,4 +11,7 @@
     <label for="estimate">Estimate (hours)</label>
     <input type="text" class="form-control" type="number" formControlName="estimate">
   </div>
+  <button type="button" class="btn btn-default pull-right" (click)="create()">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+  </button>
 </form>

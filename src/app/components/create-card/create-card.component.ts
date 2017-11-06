@@ -1,6 +1,6 @@
 import { AddTask } from '../../store/task/task.action';
 import { Store } from '@ngrx/store';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import * as reducers from '../../store/reducers';
 import { Column, Task } from '../../store/task/task';
@@ -14,14 +14,18 @@ export class CreateCardComponent implements OnInit {
 
   createCardForm: FormGroup;
   num = 0;
-  constructor(private store: Store<reducers.State>) { }
+  constructor(private store: Store<reducers.State>, private fb: FormBuilder) {
+    this.createCardForm = this.fb.group({
+      title: [null, Validators.required],
+      description: ['', Validators.required],
+      estimate: [1, Validators.required]
+    });
+  }
 
   ngOnInit() {
-    this.createCardForm = new FormGroup({
-      title: new FormControl(),
-      description: new FormControl(),
-      estimate: new FormControl()
-    });
+
+
+    console.log(this.createCardForm);
   }
 
   create() {
@@ -35,6 +39,7 @@ export class CreateCardComponent implements OnInit {
     this.store.dispatch(new AddTask(task));
     this.createCardForm.reset();
   }
+
   nextNumber(): number {
     this.num++;
     return this.num;

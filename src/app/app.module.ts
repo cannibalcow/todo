@@ -1,3 +1,4 @@
+import { ReactiveFormsModule } from '@angular/forms';
 import { SummaryComponent } from './components/summary/summary.component';
 import { KanbanComponent } from './components/kanban/kanban.component';
 import { CardComponent } from './components/card/card.component';
@@ -16,13 +17,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { reducers } from './store/reducers';
+import { CreateCardComponent } from './components/create-card/create-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CardComponent,
     KanbanComponent,
-    SummaryComponent
+    SummaryComponent,
+    CreateCardComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,8 @@ import { reducers } from './store/reducers';
     EffectsModule.forRoot([
       TaskEffect
     ]),
-    DBModule.provideDB(schema)
+    DBModule.provideDB(schema),
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

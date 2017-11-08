@@ -18,13 +18,23 @@ export class CreateCardComponent implements OnInit {
     this.createCardForm = this.fb.group({
       title: [null, Validators.required],
       description: ['', Validators.required],
-      estimate: [1, Validators.required]
+      estimate: [1, Validators.required],
+      shoppingList: this.fb.array([this.initShoppingList()])
     });
   }
 
+  initShoppingList(): FormGroup {
+    return this.fb.group({
+      store: [null, Validators.required],
+      name: [null, Validators.required],
+      quantity: [1, Validators.required]
+    });
+  }
+
+  addEmptyItem() {
+  }
+
   ngOnInit() {
-
-
     console.log(this.createCardForm);
   }
 

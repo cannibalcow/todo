@@ -1,6 +1,5 @@
 export class ShoppingItem {
-    location: String;
+    store: String;
     name: string;
     quantity: number;
-    price: number;
 }

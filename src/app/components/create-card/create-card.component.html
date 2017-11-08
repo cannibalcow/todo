@@ -3,7 +3,7 @@
     <label for="titleInput">Title</label>
     <input id="titleInput" class="form-control" type="Text" formControlName="title" />
   </div>
-  <div class="alert alert-danger" role="alert" *ngIf="!createCardForm.controls[title].valid">Title required </div>
+  <div class="alert alert-danger" role="alert" *ngIf="!createCardForm.controls['title'].valid && createCardForm.controls['title'].touched">Title required </div>
   <div class="form-group">
     <label for="description">Description</label>
     <input id="description" class="form-control" type="text" formControlName="description" />
@@ -12,14 +12,9 @@
     <label for="estimate">Estimate (hours)</label>
     <input type="text" class="form-control" type="number" formControlName="estimate">
   </div>
-  <div class="alert alert-danger" role="alert" *ngIf="!createCardForm.controls[estimate].valid">Wrong </div>
-  <button type="button" class="btn btn-default pull-right" (click)="create()" disabled="!createCardForm.valid && createCardForm.dirty">
+  <div class="alert alert-danger" role="alert" *ngIf="!createCardForm.controls['estimate'].valid && createCardForm.controls['estimate'].touched">Missing estimate</div>
+  <button type="button" class="btn btn-default pull-right" (click)="create()" [disabled]="!createCardForm.valid">
     Create Task
     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
   </button>
 </form>
-
-<pre>
-
-  {{createCardForm|json}}
-</pre>

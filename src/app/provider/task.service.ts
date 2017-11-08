@@ -7,7 +7,6 @@ export class TaskService {
   tasks: Task[] = [];
 
   constructor() {
-    db = new
   }
 
   addTask(task: Task) {

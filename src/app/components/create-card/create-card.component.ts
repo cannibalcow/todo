@@ -38,6 +38,7 @@ export class CreateCardComponent implements OnInit {
 
     this.store.dispatch(new AddTask(task));
     this.createCardForm.reset();
+    this.createCardForm.get('estimate').setValue(1);
   }
 
   nextNumber(): number {

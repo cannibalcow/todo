@@ -1,1 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+    /* background-image: url("http://allswalls.com/images/blurry-wallpaper-5.jpg"); */
+}
+
+
+h1 {
+    color: white;
+}
+
+#backlog {
+    background: #909bc0;
+}
+
+#done {
+    background: #1c6e61;
+}
+
+#done h1 {
+    color: white;
+}
+
+#progress {
+    background: #bada7f;
+}
+
+#progress h1 {
+    color: white;
+}

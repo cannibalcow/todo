@@ -1,9 +1,10 @@
 import { AddTask } from '../../store/task/task.action';
 import { Store } from '@ngrx/store';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import * as reducers from '../../store/reducers';
 import { Column, Task } from '../../store/task/task';
+import { ShoppingItem } from '../../store/task/shopping-item';
 
 @Component({
   selector: 'app-create-card',
@@ -32,10 +33,11 @@ export class CreateCardComponent implements OnInit {
   }
 
   addEmptyItem() {
+    const items = this.createCardForm.get('shoppingList') as FormArray;
+    items.push(this.initShoppingList());
   }
 
   ngOnInit() {
-    console.log(this.createCardForm);
   }
 
   create() {
@@ -45,6 +47,17 @@ export class CreateCardComponent implements OnInit {
     task.title = this.createCardForm.get('title').value;
     task.estimate = this.createCardForm.get('estimate').value;
     task.id = this.nextNumber();
+
+    task.shoppingList = [];
+    const shoppingList = this.createCardForm.get('shoppingList') as FormArray;
+    shoppingList.controls.forEach(ctrl => {
+      task.shoppingList.push({
+        store: ctrl.get('store').value,
+        name: ctrl.get('name').value,
+        quantity: ctrl.get('quantity').value
+      });
+    });
+
 
     this.store.dispatch(new AddTask(task));
     this.createCardForm.reset();

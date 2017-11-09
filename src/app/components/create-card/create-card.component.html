@@ -1,33 +1,41 @@
 <form class="form" [formGroup]="createCardForm">
-  <div class="form-group">
-    <label for="titleInput">Title</label>
-    <input id="titleInput" class="form-control" type="Text" formControlName="title" />
-  </div>
-  <div class="alert alert-danger" role="alert" *ngIf="!createCardForm.controls['title'].valid && createCardForm.controls['title'].touched">Title required </div>
-  <div class="form-group">
-    <label for="description">Description</label>
-    <input id="description" class="form-control" type="text" formControlName="description" />
-  </div>
-  <div class="form-group">
-    <label for="estimate">Estimate (hours)</label>
-    <input type="text" class="form-control" type="number" formControlName="estimate">
-  </div>
-  <div class="form-group" formArrayName="shoppingList">
-    <label for="shoppinglist">Shoppinglist</label>
-    <div *ngFor="let item of createCardForm.controls.shoppingList.controls; let i=index">
-      <div [formGroupName]="i">
-        <strong>{{i}}</strong>
-        <input placeholder="Store" type="text" class="form-control" formControlName="store" />
-        <input placeholder="Item name" type="text" class="form-control" formControlName="name" />
-        <input placeholder="Quantity" type="number" class="form-control " formControlName="quantity " />
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="titleInput">Title</label>
+        <input id="titleInput" class="form-control" type="Text" formControlName="title" />
       </div>
-      <button type="button" class="btn btn-default pull-right">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-      </button>
+      <div class="alert alert-danger" role="alert" *ngIf="!createCardForm.controls['title'].valid && createCardForm.controls['title'].touched">Title required </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input id="description" class="form-control" type="text" formControlName="description" />
+      </div>
+      <div class="form-group">
+        <label for="estimate">Estimate (hours)</label>
+        <input type="text" class="form-control" type="number" formControlName="estimate">
+      </div>
+      <div class="alert alert-danger " role="alert " *ngIf="!createCardForm.controls[ 'estimate'].valid && createCardForm.controls['estimate'].touched ">Missing estimate</div>
     </div>
   </div>
-  <div class="alert alert-danger " role="alert " *ngIf="!createCardForm.controls[ 'estimate'].valid && createCardForm.controls[
-          'estimate'].touched ">Missing estimate</div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group" formArrayName="shoppingList">
+        <label for="shoppinglist">Shoppinglist</label>
+        <div *ngFor="let item of createCardForm.controls.shoppingList.controls; let i=index; let l = last; let f = first">
+          <div [formGroupName]="i">
+            <strong>#{{i+1}}</strong>
+            <input placeholder="Store" type="text" class="form-control" formControlName="store" />
+            <input placeholder="Item name" type="text" class="form-control" formControlName="name" />
+            <input placeholder="Quantity" type="number" class="form-control " formControlName="quantity" />
+          </div>
+          <button *ngIf="f && l || l" type="button" class="btn btn-default pull-right" (click)="addEmptyItem()">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <button type="button " class="btn btn-default pull-right " (click)="create() " [disabled]="!createCardForm.valid ">
     Create Task
     <span class="glyphicon glyphicon-plus " aria-hidden="true "></span>

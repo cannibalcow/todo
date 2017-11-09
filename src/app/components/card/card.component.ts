@@ -14,6 +14,7 @@ import { Column, Task } from '../../store/task/task';
 export class CardComponent implements OnInit {
 
   @Input() task: Task;
+  showList = false;
 
   constructor(private store: Store<reducers.State>) { }
 
@@ -42,5 +43,9 @@ export class CardComponent implements OnInit {
 
   isDone() {
     return this.task.column === Column.DONE;
+  }
+
+  toggleShoppingList() {
+    this.showList = !this.showList;
   }
 }

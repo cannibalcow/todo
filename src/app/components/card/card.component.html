@@ -1,12 +1,30 @@
 <div class="list-group" *ngIf="task">
   <div class="list-group-item active">
     <span>#{{task.id}} - {{task.title}}</span>
-
+    <div class="pull-right">{{task.estimate}}
+      <span class="glyphicon glyphicon-time"></span>
+    </div>
   </div>
   <div class="list-group-item">
     <p>{{task.description}}</p>
     <p>
       <strong>Estimate: </strong>{{task.estimate}} hours
+    </p>
+    <p>
+      Shoppinglist
+      <button type="button" class="btn btn-default btn-xs" (click)="toggleShoppingList()">
+        <span class="glyphicon glyphicon-th-list"></span>
+      </button>
+    </p>
+    <p>
+      <span *ngIf="showList">
+        <ul class="list-group" *ngFor="let item of task.shoppingList; let i = index;">
+          <li class="list-group-item">
+            <span class="badge">{{item.quantity}}</span>
+            {{item.store}}: {{item.name}} {{item.quantity}}
+          </li>
+        </ul>
+      </span>
     </p>
     <button type="button" class="btn btn-default pull-left btn-xs" aria-label="Left Align" (click)="delete(task.id)">
       <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>

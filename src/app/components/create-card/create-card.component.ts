@@ -37,6 +37,14 @@ export class CreateCardComponent implements OnInit {
     items.push(this.initShoppingList());
   }
 
+  resetShoppingList() {
+    // this.createCardForm.get('shoppingList').reset(this.initShoppingList(), { emitEvent: true, });
+    const items = this.createCardForm.get('shoppingList') as FormArray;
+    for (let i = 0; i < items.length; i++) {
+      items.removeAt(i);
+    }
+  }
+
   ngOnInit() {
   }
 
@@ -60,8 +68,10 @@ export class CreateCardComponent implements OnInit {
 
 
     this.store.dispatch(new AddTask(task));
-    this.createCardForm.reset();
     this.createCardForm.get('estimate').setValue(1);
+    this.resetShoppingList();
+    this.createCardForm.reset();
+    console.log(this.createCardForm.get('shoppingList'));
   }
 
   nextNumber(): number {
